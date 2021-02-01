@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+<style>
+    * html  {
+      font:Arial;
+    }
+    th {
+     color: white;
+     background: green;
+   }
+   td{
+   border:1;
+   text-align:center;
+   }
+   table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   }
+   </style>
+<body background="school.jpg">
+    <ngx-spinner></ngx-spinner>
+  <div *ngIf></div>
+  <div *ngIf="isEmpty"><h4>No payments done yet!</h4></div>
+    <div *ngIf="!isEmpty">
+        <h5 align=center>Past payments</h5>
+        <table class="box" border=2 >
+            
+          <th>Payment ID</th>
+            <th>Payment Date</th>
+            <th>Payment Amount</th>
+            <tr *ngFor="let payment of payments" >
+              <td>{{payment.paymentId}}</td>
+              <td>{{payment.paymentDate}}</td>
+                <td>{{payment.paymentAmount}}$</td>
+              </tr>
+              </table>
+</div>
+  </body>
+  </html>
+

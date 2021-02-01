@@ -1,0 +1,207 @@
+<html>
+<head>
+<title>Course Registration System</title>
+</head>
+<style>
+        input[type="text"], input[type="date"], input[type=number], input[type=password],
+        select
+         {
+            width: 75%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid green;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: 1px solid green;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        h4{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    
+        
+    
+        button {
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            padding: 4px;
+            width: 345px;
+            border-radius: 8px;
+            height: 35px;
+            border: 1px solid green;
+        }
+    
+        button:hover {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+        }
+    
+        
+    </style>
+
+    <body class="box">
+            <ngx-spinner></ngx-spinner>
+        <form  [formGroup]="addCourseForm" class=login100-form (ngSubmit)="onSubmit()">
+                        
+        <h4>Add Course</h4>
+        
+    <div class="row">
+        <div class="wrap-input100 columnl form-group">
+            <input type="text" formControlName="courseId" class=" input100 form-control" placeholder="Course ID"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseId.errors) || (f.courseId.touched && f.courseId.errors) }" />
+            <span class="focus-input100"></span>
+             <div class="invalid-feedback" *ngIf="f.courseId.touched && f.courseId.errors?.required">Course ID is required</div>
+        </div>
+        <div class="wrap-input100 form-group columnl">
+            <input type="text" formControlName="courseName" class=" input100 form-control"
+                placeholder="Course Name"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseName.errors) || (f.courseName.touched && f.courseName.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.courseName.errors) || (f.courseName.touched && f.courseName.errors)" class="invalid-feedback">
+            <div *ngIf="f.courseName.errors?.required">Coursename is required
+            </div>
+            </div>
+        </div>
+        <div class="form-group wrap-input100 columnl">
+            <select class="dropdown" required formControlName="deptId" name="deptId"
+                [ngClass]="{ 'is-invalid': (submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors) }">
+                <span class="focus-input100"></span>
+                <option value='' selected>Department</option>
+                <option *ngFor="let dept of departments" value={{dept.deptId}}>
+                    {{dept.deptName}}
+                </option>
+            </select>
+            <div *ngIf="(submitted&&f.deptId.errors)||(f.deptId.touched&&f.deptId.errors)" class="invalid-feedback">
+                    <div *ngIf="f.deptId.errors?.required">Please select your department</div>
+</div>
+        </div>
+        <div class="wrap-input100 form-group columnl">
+            <input type="text" formControlName="professor" class=" input100 form-control"
+                placeholder="Professor Name"
+                [ngClass]="{ 'is-invalid': (submitted&&f.professor.errors) || (f.professor.touched && f.professor.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.professor.errors) || (f.professor.touched && f.professor.errors)" class="invalid-feedback">
+            <div  *ngIf="f.professor.errors?.required">professor Name is required</div>
+            </div>
+        </div>
+        <div class="form-group wrap-input100 columnl">
+            <select class="dropdown" required formControlName="degree" name="degree"
+                [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }">
+                <span class="focus-input100"></span>
+                
+                <option value='' selected>Degree</option>
+                <option value='G' >Graduate</option>
+                <option value='UG'>Under Graduate</option>
+            </select>
+            <div *ngIf="(submitted&&f.degree.errors)||(f.degree.touched&&f.degree.errors)" class="invalid-feedback">
+                    <div *ngIf="f.degree.errors?.required">Please select your degree</div>
+</div>
+        </div>
+        <div class="form-group wrap-input100 columnl">
+            <select class="dropdown" required formControlName="isMandatory" name="isMandatory"
+                [ngClass]="{ 'is-invalid': (submitted&&f.isMandatory.errors) || (f.isMandatory.touched && f.isMandatory.errors) }">
+                <span class="focus-input100"></span>
+                
+                <option value='' selected>Is Mandatory?</option>
+                <option value=true >Yes</option>
+                <option value=false>No</option>
+            </select>
+            <div *ngIf="(submitted&&f.isMandatory.errors)||(f.isMandatory.touched&&f.isMandatory.errors)" class="invalid-feedback">
+                    <div *ngIf="f.isMandatory.errors?.required">Please tell if the course is mandatory</div>
+</div>
+        </div>
+         <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="number" formControlName="amount" class=" input100 form-control"
+                placeholder="Amount"
+                [ngClass]="{ 'is-invalid': (submitted&&f.amount.errors) || (f.amount.touched && f.amount.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.amount.errors) || (f.amount.touched && f.amount.errors)" class="invalid-feedback">
+                <div *ngIf="f.mobile.errors?.required">Amount is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="number" formControlName="courseMaxStrength" class=" input100 form-control"
+                placeholder="Maximum Course Strength"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseMaxStrength.errors) || (f.courseMaxStrength.touched && f.courseMaxStrength.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.courseMaxStrength.errors) || (f.courseMaxStrength.touched && f.courseMaxStrength.errors)" class="invalid-feedback">
+                <div *ngIf="f.courseMaxStrength.errors?.required">Course Maximum Strength is required</div>
+                
+            </div> 
+            </div>
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="text" formControlName="courseTimings" class=" input100 form-control"
+                placeholder="Course Timings"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseTimings.errors) || (f.courseTimings.touched && f.courseTimings.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.courseTimings.errors) || (f.courseTimings.touched && f.courseTimings.errors)" class="invalid-feedback">
+                <div *ngIf="f.courseTimings.errors?.required">Course Timings is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <select class="dropdown" required formControlName="days" placeholder="Days"
+                [ngClass]="{ 'is-invalid': (submitted&&f.days.errors) || (f.days.touched && f.days.errors) }" >
+            <span class="focus-input100"></span>
+            <option value='' selected>Days</option>
+                <option value='Monday' >Monday</option>
+                <option value='Tuesday' >Tuesday</option>
+                <option value='Wednesday' >Wednesday</option>
+                <option value='Thursday' >Thursday</option>
+                <option value='Friday' >Friday</option>
+                <option value='Saturday' >Saturday</option>
+                <option value='Sunday' >Sunday</option>
+        </select>
+            <div *ngIf="(submitted&&f.days.errors) || (f.days.touched && f.days.errors)" class="invalid-feedback">
+                <div *ngIf="f.days.errors?.required">Days is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="date" formControlName="startDate" class=" input100 form-control"
+                placeholder="Start Date"
+                [ngClass]="{ 'is-invalid': (submitted&&f.startDate.errors) || (f.startDate.touched && f.startDate.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.startDate.errors) || (f.startDate.touched && f.startDate.errors)" class="invalid-feedback">
+                <div *ngIf="f.startDate.errors?.required">Start Date is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="date" formControlName="endDate" class=" input100 form-control"
+                placeholder="End Date"
+                [ngClass]="{ 'is-invalid': (submitted&&f.endDate.errors) || (f.endDate.touched && f.endDate.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.endDate.errors) || (f.endDate.touched && f.endDate.errors)" class="invalid-feedback">
+                <div *ngIf="f.endDate.errors?.required">End Date is required</div>
+                
+            </div>
+        </div>
+     
+      
+    <div class="container-login100-form-btn form-group">
+        <button type="submit" [disabled]="loading"
+            class="login100-form-btn btn btn-primary">SUBMIT</button> 
+    
+    </div>
+    </div>
+    </form>
+</body>
+    </html>

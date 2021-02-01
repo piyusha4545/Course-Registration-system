@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+<style>
+    * html  {
+      font:Arial;
+    }
+    th {
+     
+     background: green;
+   }
+   td{
+   border:1;
+   text-align:center;
+   }
+   table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   }
+   </style>
+   <div *ngIf="isEmpty"><h4>No Mandatory Courses are done</h4></div>
+
+<body class="box">
+    <ngx-spinner></ngx-spinner>
+    <div *ngIf="!isEmpty">
+      <h6 >Mandatory courses which you have completed/enrolled:</h6>
+        <table border=2 >
+            <th>Course ID</th>
+            <th>Course Name</th>          
+            <tr *ngFor="let course of donecourses" >
+              <td>{{course.courseId}}</td>
+                <td>{{course.courseName}}</td>
+                
+              </tr>
+              </table>
+</div>
+<br>
+<br>
+<div *ngIf="isEmpty1"><h4>All Mandatory Courses are done</h4></div>
+<div *ngIf="!isEmpty1">
+    <h6 > Mandatory courses which are yet to be done:</h6>
+      <table border=2 >
+          <th>Course ID</th>
+          <th>Course Name</th>          
+          <tr *ngFor="let course of notenrolledcourses" >
+            <td>{{course.courseId}}</td>
+              <td>{{course.courseName}}</td>
+              
+            </tr>
+            </table>
+</div>
+  </body>
+  </html>
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+<style>
+    * html  {
+      font:Arial;
+    }
+    th {
+     
+     background: green;
+   }
+   td{
+   
+   text-align:center;
+   }
+   /* table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   } */
+   button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 100px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
+   </style>
+<body class="box">
+    <ngx-spinner></ngx-spinner>
+        <form [formGroup]="paymentForm" (ngSubmit)="onsubmit()">
+          <h4>Payment</h4>
+          <br>
+          <div >
+           <table >
+             <tr>
+               <td>Total Due:</td>
+               <td>${{due}}.00</td>
+             </tr>
+             <tr>
+                <td>Enter Amount</td >
+                <td>
+                  <input type="number" required formControlName="paymentAmount" name="paymentAmount" [ngClass]="{ 'is-invalid': submitted && f.paymentAmount.errors }"/>
+                </td>
+
+              </tr>
+              <div *ngIf="submitted && f.paymentAmount.errors" class="invalid-feedback">
+              <tr *ngIf="paymentAmount.errors.required">Please enter the amount you wish to pay
+              </tr>
+            </div>
+           </table>
+          </div>
+           <div>
+              <button type="submit">PAY</button>
+            </div>
+        </form>
+     
+</body>
+
+</html>

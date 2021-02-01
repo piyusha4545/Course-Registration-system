@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Course Registration System</title>
+</head>
+<style>
+        * html{
+          font-family:Arial;
+        }
+        option{
+          border: 2px;
+        }
+          th {
+           
+           background: green;
+           color: white;
+         }
+         td{
+         
+         text-align:center;
+         }
+         /* table tr:nth-child(even) {
+           background-color: #eee;
+         }
+         table tr:nth-child(odd) {
+           background-color: #fff;
+         } */
+         input[type=text], select {
+                width: 50%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                top:50%;
+                display: inline-block;
+                border: 1px solid black;
+                border-radius: 4px;
+                box-sizing: border-box;
+              }
+              button {
+              -webkit-transition-duration: 0.4s;
+              /* Safari */
+              transition-duration: 0.4s;
+              padding: 4px;
+              width: 100px;
+              border-radius: 8px;
+              height: 35px;
+              border: 1px solid green;
+          }
+      
+          button:hover {
+              background-color: #4CAF50;
+              /* Green */
+              color: white;
+          }
+         </style>
+<body class="box">
+    <h4>Swap Courses</h4>
+    <form [formGroup]="swapForm"  (ngSubmit)="onSubmit()">
+      <div>
+        <table><tr><td>Please select the enrolled course you want to swap</td>
+        <td><select class="dropdown" required formControlName="enrolledCourse" name="enrolledCourse">
+
+       <option value='' selected>Select</option>
+<option *ngFor="let course of enrolledCourses" value={{course.courseId}}>
+    {{course.courseName}}
+</option>
+</select>
+</td>
+</tr>
+<tr>
+  <td>Please select the course you want to swap with</td>
+  <td><select class="dropdown" required formControlName="swapCourse" name="swapCourse">
+      <option value='' selected>Select</option>
+<option *ngFor="let course of notEnrolledCourses" value={{course.courseId}}>
+   {{course.courseName}}
+</option>
+</select></td>
+
+</tr>
+</table>
+      </div>
+      <div>
+          <button type="submit">SWAP</button>
+      </div>
+    </form>
+      
+
+</body>
+</html>

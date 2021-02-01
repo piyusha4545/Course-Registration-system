@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Course Registration System</title>
+</head>
+<style>
+    input[type=text],
+    select {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=password] {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: 1px solid green;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+    h4{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    h6{
+        color: white;
+        font-size: 30px;
+        align-content: center;
+    }
+    
+
+    button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 345px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
+
+    
+</style>
+
+<body class="body">
+        <ngx-spinner></ngx-spinner>
+    <img src="assets/images/education.jpg" alt="img">
+    <div class="box">
+        <h6><b>COURSE REGISTRATION SYSTEM</b></h6><br>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="main" >
+                <h4 >User Login</h4>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                &nbsp;
+                <input type="text" formControlName="id" placeholder="Student ID"
+                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+
+                <div *ngIf="(f.id.touched && f.id.errors) || (submitted && f.id.errors)" class="invalid-feedback">
+                    <div *ngIf="f.id.errors.required">Student ID is required</div>
+                </div>
+                <br>
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                &nbsp;
+                <input type="password" formControlName="password" placeholder="Password"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+
+                <div *ngIf="(f.password.touched && f.password.errors) ||(submitted && f.password.errors)" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+
+                <br> &nbsp; &nbsp; &nbsp;
+                <button type="submit" [disabled]="loading" class="login100-form-btn btn btn-primary">Login</button>
+                <br>
+                <br>
+                <span >
+                    Forgot
+                </span>
+                <a  [routerLink]="['/resetPassword']">
+                    Username / Password?
+                </a>
+                <br>
+                <br>
+                <a [routerLink]="['/signup']">
+                    Create your Account
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                </a>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>
+<!-- http://jasonwatmore.com/post/2018/05/16/angular-6-user-registration-and-login-example-tutorial -->

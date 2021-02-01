@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Course Registration System</title>
+</head>
+<style>
+  * html{
+    font-family:Arial;
+  }
+  option{
+    border: 2px;
+  }
+    th {
+     
+     background: green;
+     color: white;
+   }
+   td{
+   
+   text-align:center;
+   }
+   table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   }
+   input[type=text], select {
+          width: 50%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          top:50%;
+          display: inline-block;
+          border: 1px solid black;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 100px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
+   </style>
+<body >
+    <ngx-spinner></ngx-spinner>
+  <div class="box">
+    <!-- <h3>Please Choose</h3> -->
+    <form *ngIf="form" [formGroup]="selectCriteriaForm"  (ngSubmit)="onSubmit()">
+      <h3>PLease choose</h3>
+      <div class="select">
+        <select class="dropdown" required formControlName="degree" name="degree"
+        [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }">
+        <span class="focus-input100"></span>
+        <option value='' selected>Degree</option>
+        <option value='UG' >Under Graduate</option>
+        <option value='G' >Graduate</option>
+      </select>
+      </div>
+      <div class="select">
+  <select class="dropdown" required formControlName="deptId" name="deptId"
+[ngClass]="{ 'is-invalid': (submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors) }">
+<option value='' selected>Department</option>
+<option *ngFor="let dept of departments" value={{dept.deptId}}>
+    {{dept.deptName}}
+</option>
+</select>
+      </div>
+      <div>
+      <button type="submit">SUBMIT</button>
+      </div>
+    </form>
+      <div *ngIf="displayCourses">
+          <table>
+              <th>Course ID</th>
+              <th>Course Name</th>
+              <th>Professor</th>
+            <th>Course Timings</th>
+              <tr *ngFor="let course of courses" >
+                <td>{{course.courseId}}</td>
+                  <td>{{course.courseName}}</td>
+                  <td>{{course.professor}}</td>
+                  <td>{{course.courseTimings}}</td>
+                  <td> &nbsp; &nbsp;</td>
+                <!--  <td><a [routerLink]="['/cart', { courseId:course.courseId }]">ENROLL</a></td>-->
+                  <td id="button"><button #btn [disabled]="course.isAddedtoCart" value={{course.courseId}}  (click)="addtocart(btn.value)">ADD TO CART</button></td>
+                  
+               <!--[disabled]="course.isAddedtoCart"   <td *ngIf="enrolled"><button disabled>Added to cart</button></td>-->
+
+                </tr>
+                <tr><td><button type="submit" [routerLink]="['/cart']">Go to cart</button></td></tr>
+                </table>
+</div>
+</div>
+
+</body>
+</html>
